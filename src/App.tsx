@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Header} from './components/Header/Header';
+import Sidebar from './components/Sidebar/Sidebar';
+import Profile from './components/Profile/Profile';
+import {Footer} from './components/Footer/Footer';
+import {BrowserRouter, Route} from 'react-router-dom';
+import {Dialogs} from './components/Dialogs/Dialogs';
+import {News} from './components/News/News';
+import Settings from './components/Settings/Settings';
+import {RootStateType} from './redux/state';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type AppPropsType = {
+    state: RootStateType
 }
 
-export default App;
+export const App: React.FC<AppPropsType> = ({state}) => {
+    return (
+
+        <BrowserRouter>
+            <div className="wrapper">
+                <Header/>
+                <main className="main">
+                    <Sidebar/>
+
+                    <Route path="/profile/" render={() => <Profile profilePage={state.profilePage}/>}/>
+                    <Route path="/dialogs/" render={() => <Dialogs messagesPage={state.messagesPage}/>}/>
+                    <Route path="/news/" render={() => <News/>}/>
+                    <Route path="/settings/" render={() => <Settings/>}/>
+
+                </main>
+                <Footer/>
+            </div>
+        </BrowserRouter>
+    );
+}

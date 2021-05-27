@@ -1,0 +1,27 @@
+.sidebar {
+    background-color: #4ecce6;
+    padding: 30px 0;
+    grid-column: 1 / 2;
+}
+
+.menu {
+}
+
+.list li {
+    margin: 0 0 15px 30px;
+}
+
+.link {
+    color: #fff;
+    font-size: 16px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.sidebar a.active {
+    color: chartreuse;
+}
+
