@@ -6,13 +6,14 @@ import {ProfilePageType} from '../../redux/state';
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
+    addPost: (postMessage: string) => void
 }
 
-const Profile: React.FC<ProfilePropsType> = ({profilePage}) => {
+const Profile: React.FC<ProfilePropsType> = ({profilePage, addPost}) => {
     return (
         <section className={styles.content}>
             <ProfileInfo />
-            <Posts profilePage={profilePage}/>
+            <Posts profilePage={profilePage} addPost={addPost}/>
         </section>
     )
 }

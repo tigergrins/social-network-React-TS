@@ -1,15 +1,13 @@
 import React from 'react';
 import styles from './Dialogs.module.css';
 import {DialogsItem} from './DialogsItem/DialogsItem';
-import MessagesItem from './Messages/MessagesItem';
+import MessagesItem from './MessagesItem/MessagesItem';
 import {DialogsInput} from './DialogsInput/DialogsInput';
 import {MessagesPageType} from '../../redux/state';
 
 type DialogsPropsType = {
     messagesPage: MessagesPageType
 }
-
-
 
 export const Dialogs: React.FC<DialogsPropsType> = ({messagesPage}) => {
     let dialogsElements = messagesPage.dialogs.map(

@@ -8,7 +8,7 @@ type DialogsItemPropsType = {
 }
 
 export const DialogsItem: React.FC<DialogsItemPropsType> = ({id, name}) => {
-    let path = '/dialogs/' + id;
+    let path = `/dialogs/${id}`;
 
     return (
         <div className={styles.dialogue}>
