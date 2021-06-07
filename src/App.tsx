@@ -8,11 +8,12 @@ import {Route} from 'react-router-dom';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {News} from './components/News/News';
 import Settings from './components/Settings/Settings';
-import {RootStateType} from './redux/state';
+import {RootStateType, updateNewPostText} from './redux/state';
 
 type AppPropsType = {
     state: RootStateType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 export const App: React.FC<AppPropsType> = ({state, addPost}) => {
@@ -22,7 +23,12 @@ export const App: React.FC<AppPropsType> = ({state, addPost}) => {
             <main className="main">
                 <Sidebar/>
 
-                <Route path="/profile/" render={() => <Profile profilePage={state.profilePage} addPost={addPost}/>}/>
+                <Route path="/profile/" render={() =>
+                    <Profile profilePage={state.profilePage}
+                             addPost={addPost}
+                             updateNewPostText={updateNewPostText}
+                    />}
+                />
                 <Route path="/dialogs/" render={() => <Dialogs messagesPage={state.messagesPage}/>}/>
                 <Route path="/news/" render={() => <News/>}/>
                 <Route path="/settings/" render={() => <Settings/>}/>
