@@ -1,5 +1,3 @@
-import {renderEntireTree} from '../render';
-
 type PostsType = {
     id: number
     message: string
@@ -30,6 +28,12 @@ export type RootStateType = {
     profilePage: ProfilePageType
     messagesPage: MessagesPageType
 }
+
+type subscribeType = {
+    subscribe: (observer: RootStateType) => void
+}
+
+let renderEntireTree = (state: RootStateType) => {}
 
 export let state: RootStateType = {
     profilePage: {
@@ -75,4 +79,8 @@ export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
 
     renderEntireTree(state)
+}
+
+export const subscribe = (observer: (observer: RootStateType) => void ) => {
+    renderEntireTree = observer
 }
