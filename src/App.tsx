@@ -8,7 +8,7 @@ import {Route} from 'react-router-dom';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {News} from './components/News/News';
 import Settings from './components/Settings/Settings';
-import {RootStateType, updateNewPostText} from './redux/state';
+import {RootStateType} from './redux/state';
 
 type AppPropsType = {
     state: RootStateType
@@ -16,7 +16,7 @@ type AppPropsType = {
     updateNewPostText: (newText: string) => void
 }
 
-export const App: React.FC<AppPropsType> = ({state, addPost}) => {
+export const App: React.FC<AppPropsType> = ({state, addPost, updateNewPostText}) => {
     return (
         <div className="wrapper">
             <Header/>

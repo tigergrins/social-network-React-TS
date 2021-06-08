@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Posts.module.css';
 import Posting from "./Posting/Posting";
 import Posted from "./Posted/Posted";
-import {ProfilePageType, updateNewPostText} from '../../../redux/state';
+import {ProfilePageType} from '../../../redux/state';
 
 type PostsPropsType = {
     profilePage: ProfilePageType
@@ -17,7 +17,7 @@ function Posts(props: PostsPropsType) {
             <section className={styles.posts}>
                 <Posting newPostText={props.profilePage.newPostText}
                          addPost={props.addPost}
-                         updateNewPostText={updateNewPostText}
+                         updateNewPostText={props.updateNewPostText}
                 />
                 <div className={styles.items}>
                     {postsElements}

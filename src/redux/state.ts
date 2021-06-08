@@ -29,58 +29,70 @@ export type RootStateType = {
     messagesPage: MessagesPageType
 }
 
-type subscribeType = {
-    subscribe: (observer: RootStateType) => void
+export type StoreType = {
+    _state: RootStateType
+    getState: () => RootStateType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    subscribe: (observer: (observer: RootStateType) => void) => void
+    _callSubscriber: (state: RootStateType) => void
 }
 
-let renderEntireTree = (state: RootStateType) => {}
+export let store: StoreType = {
+    _state: {
+        profilePage: {
+            posts: [
+                {id: 1, message: 'Hello!!!', likesCount: 6},
+                {id: 2, message: 'My second post', likesCount: 1},
+                {id: 3, message: 'My first post', likesCount: 123}
+            ],
+            newPostText: 'Напиши, что-думаешь...'
+        },
 
-export let state: RootStateType = {
-    profilePage: {
-        posts: [
-            {id: 1, message: 'Hello!!!', likesCount: 6},
-            {id: 2, message: 'My second post', likesCount: 1},
-            {id: 3, message: 'My first post', likesCount: 123}
-        ],
-        newPostText: 'Напиши, что-думаешь...'
+        messagesPage: {
+            dialogs: [
+                {id: 1, name: 'Naida'},
+                {id: 2, name: 'Valentine'},
+                {id: 3, name: 'Michael'},
+                {id: 4, name: 'Bob'},
+            ],
+
+            messages: [
+                {id: 1, message: 'Hello!'},
+                {id: 2, message: 'Are you here?'},
+                {id: 3, message: 'Zzz...zzz...zzz'}
+            ],
+        }
     },
+    getState () {
+        return this._state
+    },
+    _callSubscriber (state: RootStateType) {},
+    addPost () {
+        let newPost = {
+            id: 5,
+            message: this._state.profilePage.newPostText,
+            likesCount: 0
+        };
 
-    messagesPage: {
-        dialogs: [
-            {id: 1, name: 'Naida'},
-            {id: 2, name: 'Valentine'},
-            {id: 3, name: 'Michael'},
-            {id: 4, name: 'Bob'},
-        ],
+        this._state.profilePage.posts.push(newPost)
 
-        messages: [
-            {id: 1, message: 'Hello!'},
-            {id: 2, message: 'Are you here?'},
-            {id: 3, message: 'Zzz...zzz...zzz'}
-        ],
+        this._state.profilePage.newPostText = 'Напиши, что-думаешь...'
+
+        this._callSubscriber(this._state)
+    },
+    updateNewPostText (newText: string)  {
+        this._state.profilePage.newPostText = newText
+
+        this._callSubscriber(this._state)
+    },
+    subscribe (observer: (observer: RootStateType) => void)  {
+        this._callSubscriber = observer
     }
 }
 
-export const addPost = () => {
-    let newPost = {
-        id: 5,
-        message: state.profilePage.newPostText,
-        likesCount: 0
-    };
+// window.store = store
 
-    state.profilePage.posts.push(newPost)
 
-    state.profilePage.newPostText = 'Напиши, что-думаешь...'
 
-    renderEntireTree(state)
-}
 
-export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText
-
-    renderEntireTree(state)
-}
-
-export const subscribe = (observer: (observer: RootStateType) => void ) => {
-    renderEntireTree = observer
-}
