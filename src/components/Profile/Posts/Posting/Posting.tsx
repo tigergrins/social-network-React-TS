@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Posting.module.css';
-import {ActionTypes} from '../../../../redux/state';
+import {ActionTypes, addPostAC, updateNewPostTextAC} from '../../../../redux/state';
 
 type PostingPropsType = {
     newPostText: string
@@ -11,19 +11,15 @@ function Posting(props: PostingPropsType) {
     let newPostElement = React.useRef<HTMLTextAreaElement>(null);
 
     const sendTextToState = () => {
-            // props.addPost()
-        props.dispatch({type: 'ADD-POST'})
+
+        props.dispatch(addPostAC())
     }
 
     const onChangeInTextArea = () => {
         if (null !== newPostElement.current) {
             let text = newPostElement.current.value
 
-            // props.updateNewPostText(text)
-            props.dispatch({
-                type: 'UPDATE-NEW-POST-TEXT',
-                newText: text
-            })
+            props.dispatch(updateNewPostTextAC(text))
         }
     }
     return (

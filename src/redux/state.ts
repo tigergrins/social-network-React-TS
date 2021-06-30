@@ -29,23 +29,14 @@ export type RootStateType = {
     messagesPage: MessagesPageType
 }
 
-type AddPostActionType = {
-    type: 'ADD-POST'
-}
-
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-
-export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
 
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     subscribe: (observer: (observer: RootStateType) => void) => void
     _callSubscriber: (state: RootStateType) => void
-    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 export let store: StoreType = {
@@ -99,6 +90,9 @@ export let store: StoreType = {
         }
     }
 }
+
+export const addPostAC = () => ({type: 'ADD-POST'} as const)
+export const updateNewPostTextAC = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText: text} as const)
 
 // window.store = store
 // addPost () {
