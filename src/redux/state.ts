@@ -29,13 +29,23 @@ export type RootStateType = {
     messagesPage: MessagesPageType
 }
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
+
 export type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
     subscribe: (observer: (observer: RootStateType) => void) => void
     _callSubscriber: (state: RootStateType) => void
+    dispatch: (action: AddPostActionType | UpdateNewPostTextActionType) => void
 }
 
 export let store: StoreType = {
@@ -64,34 +74,51 @@ export let store: StoreType = {
             ],
         }
     },
+    _callSubscriber (state: RootStateType) {},
+
     getState () {
         return this._state
     },
-    _callSubscriber (state: RootStateType) {},
-    addPost () {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-
-        this._state.profilePage.posts.push(newPost)
-
-        this._state.profilePage.newPostText = 'Напиши, что-думаешь...'
-
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText (newText: string)  {
-        this._state.profilePage.newPostText = newText
-
-        this._callSubscriber(this._state)
-    },
     subscribe (observer: (observer: RootStateType) => void)  {
         this._callSubscriber = observer
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            };
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = 'Напиши, что-думаешь...'
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
+        }
     }
 }
 
 // window.store = store
+// addPost () {
+//     let newPost = {
+//         id: 5,
+//         message: this._state.profilePage.newPostText,
+//         likesCount: 0
+//     };
+//
+//     this._state.profilePage.posts.push(newPost)
+//
+//     this._state.profilePage.newPostText = 'Напиши, что-думаешь...'
+//
+//     this._callSubscriber(this._state)
+// },
+// updateNewPostText (newText: string)  {
+//     this._state.profilePage.newPostText = newText
+//
+//     this._callSubscriber(this._state)
+// }
 
 
 

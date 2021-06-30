@@ -1,24 +1,29 @@
 import React from 'react';
 import styles from './Posting.module.css';
+import {ActionTypes} from '../../../../redux/state';
 
 type PostingPropsType = {
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
 function Posting(props: PostingPropsType) {
     let newPostElement = React.useRef<HTMLTextAreaElement>(null);
 
     const sendTextToState = () => {
-            props.addPost()
+            // props.addPost()
+        props.dispatch({type: 'ADD-POST'})
     }
 
     const onChangeInTextArea = () => {
         if (null !== newPostElement.current) {
             let text = newPostElement.current.value
 
-            props.updateNewPostText(text)
+            // props.updateNewPostText(text)
+            props.dispatch({
+                type: 'UPDATE-NEW-POST-TEXT',
+                newText: text
+            })
         }
     }
     return (

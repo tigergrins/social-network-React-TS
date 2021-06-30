@@ -8,15 +8,14 @@ import {Route} from 'react-router-dom';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {News} from './components/News/News';
 import Settings from './components/Settings/Settings';
-import {RootStateType} from './redux/state';
+import {ActionTypes, RootStateType} from './redux/state';
 
 type AppPropsType = {
     state: RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionTypes) => void
 }
 
-export const App: React.FC<AppPropsType> = ({state, addPost, updateNewPostText}) => {
+export const App: React.FC<AppPropsType> = ({state, dispatch}) => {
     return (
         <div className="wrapper">
             <Header/>
@@ -25,8 +24,7 @@ export const App: React.FC<AppPropsType> = ({state, addPost, updateNewPostText})
 
                 <Route path="/profile/" render={() =>
                     <Profile profilePage={state.profilePage}
-                             addPost={addPost}
-                             updateNewPostText={updateNewPostText}
+                             dispatch={dispatch}
                     />}
                 />
                 <Route path="/dialogs/" render={() => <Dialogs messagesPage={state.messagesPage}/>}/>
