@@ -27,7 +27,10 @@ export const App: React.FC<AppPropsType> = ({state, dispatch}) => {
                              dispatch={dispatch}
                     />}
                 />
-                <Route path="/dialogs/" render={() => <Dialogs messagesPage={state.messagesPage}/>}/>
+                <Route path="/dialogs/" render={() =>
+                    <Dialogs messagesPage={state.messagesPage}
+                             dispatch={dispatch}
+                    />}/>
                 <Route path="/news/" render={() => <News/>}/>
                 <Route path="/settings/" render={() => <Settings/>}/>
             </main>

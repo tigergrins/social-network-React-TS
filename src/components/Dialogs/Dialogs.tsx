@@ -3,13 +3,14 @@ import styles from './Dialogs.module.css';
 import {DialogsItem} from './DialogsItem/DialogsItem';
 import MessagesItem from './MessagesItem/MessagesItem';
 import {DialogsInput} from './DialogsInput/DialogsInput';
-import {MessagesPageType} from '../../redux/state';
+import {ActionTypes, MessagesPageType} from '../../redux/state';
 
 type DialogsPropsType = {
     messagesPage: MessagesPageType
+    dispatch: (action: ActionTypes) => void
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = ({messagesPage}) => {
+export const Dialogs: React.FC<DialogsPropsType> = ({messagesPage, dispatch}) => {
     let dialogsElements = messagesPage.dialogs.map(
         (dialog: { name: string; id: number; }) => <DialogsItem name={dialog.name} id={dialog.id}/>);
 
@@ -23,7 +24,8 @@ export const Dialogs: React.FC<DialogsPropsType> = ({messagesPage}) => {
             </div>
             <div className={styles.messagesItems}>
                 {messagesElements}
-                <DialogsInput/>
+                <DialogsInput dispatch={dispatch}
+                              newMessageText={messagesPage.newMessageText}/>
             </div>
         </div>
     )

@@ -22,6 +22,7 @@ export type ProfilePageType = {
 export type MessagesPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
+    newMessageText: string
 }
 
 export type RootStateType = {
@@ -29,7 +30,7 @@ export type RootStateType = {
     messagesPage: MessagesPageType
 }
 
-export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewTextMessageAC>
 
 export type StoreType = {
     _state: RootStateType
@@ -63,6 +64,7 @@ export let store: StoreType = {
                 {id: 2, message: 'Are you here?'},
                 {id: 3, message: 'Zzz...zzz...zzz'}
             ],
+            newMessageText: ''
         }
     },
     _callSubscriber (state: RootStateType) {},
@@ -87,12 +89,22 @@ export let store: StoreType = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
+        } else if (action.type === 'ADD-MESSAGE') {
+            let newMessage = {id: 12, message: this._state.messagesPage.newMessageText}
+            this._state.messagesPage.messages.push(newMessage)
+            this._callSubscriber(this._state)
+            this._state.messagesPage.newMessageText = ''
+        } else if (action.type === 'UPDATE-NEW-TEXT-MESSAGE') {
+            this._state.messagesPage.newMessageText = action.textMessage
+            this._callSubscriber(this._state)
         }
     }
 }
 
 export const addPostAC = () => ({type: 'ADD-POST'} as const)
 export const updateNewPostTextAC = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText: text} as const)
+export const addMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
+export const updateNewTextMessageAC = (text: string) => ({type: 'UPDATE-NEW-TEXT-MESSAGE', textMessage: text} as const)
 
 // window.store = store
 // addPost () {
