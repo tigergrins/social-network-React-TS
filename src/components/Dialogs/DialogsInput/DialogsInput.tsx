@@ -1,6 +1,6 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import styles from './DialogsInput.module.css';
-import {ActionTypes, addMessageAC, updateNewPostTextAC, updateNewTextMessageAC} from '../../../redux/state';
+import {ActionTypes, addMessageAC, updateNewTextMessageAC} from '../../../redux/state';
 
 type DialogsInputPropsType = {
     dispatch: (action: ActionTypes) => void
@@ -8,15 +8,14 @@ type DialogsInputPropsType = {
 }
 
 export const DialogsInput: React.FC<DialogsInputPropsType> = ({dispatch, newMessageText}) => {
-    let newMessageElement = React.useRef<HTMLTextAreaElement>(null);
 
     const addMessage = () => {
             dispatch(addMessageAC())
     }
 
     const onChangeInTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        if (null !== newMessageElement.current) {
-            let text = newMessageElement.current.value
+        if (null !== e.currentTarget.value) {
+            let text = e.currentTarget.value
 
             dispatch(updateNewTextMessageAC(text))
         }
@@ -34,7 +33,7 @@ export const DialogsInput: React.FC<DialogsInputPropsType> = ({dispatch, newMess
                       onChange={onChangeInTextAreaHandler}
                       onKeyPress={onKeyPressHandler}
                       className={styles.textarea}
-                      ref={newMessageElement}>
+                      >
             </textarea>
             <button onClick={addMessage}>Отправить</button>
         </div>
