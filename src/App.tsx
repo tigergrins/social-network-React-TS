@@ -8,14 +8,18 @@ import {Route} from 'react-router-dom';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {News} from './components/News/News';
 import Settings from './components/Settings/Settings';
-import {ActionTypes, RootStateType} from './redux/state';
+import {ActionTypes, RootStateType} from './redux/store';
+import {StoreType} from './redux/redux-store';
+import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 type AppPropsType = {
-    state: RootStateType
+    store: StoreType
     dispatch: (action: ActionTypes) => void
 }
 
-export const App: React.FC<AppPropsType> = ({state, dispatch}) => {
+export const App: React.FC<AppPropsType> = ({store, dispatch}) => {
+    const state = store.getState()
+
     return (
         <div className="wrapper">
             <Header/>
@@ -23,14 +27,10 @@ export const App: React.FC<AppPropsType> = ({state, dispatch}) => {
                 <Sidebar/>
 
                 <Route path="/profile/" render={() =>
-                    <Profile profilePage={state.profilePage}
-                             dispatch={dispatch}
-                    />}
+                    <Profile store={store}/>}
                 />
                 <Route path="/dialogs/" render={() =>
-                    <Dialogs messagesPage={state.messagesPage}
-                             dispatch={dispatch}
-                    />}/>
+                    <DialogsContainer store={store}/>}/>
                 <Route path="/news/" render={() => <News/>}/>
                 <Route path="/settings/" render={() => <Settings/>}/>
             </main>

@@ -1,23 +1,23 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import styles from './DialogsInput.module.css';
-import {ActionTypes, addMessageAC, updateNewTextMessageAC} from '../../../redux/state';
+import {ActionTypes, addMessageAC, updateNewTextMessageAC} from '../../../redux/store';
 
 type DialogsInputPropsType = {
-    dispatch: (action: ActionTypes) => void
     newMessageText: string
+    addMessage: () => void
+    updateNewTextMessage: (text: string) => void
 }
 
-export const DialogsInput: React.FC<DialogsInputPropsType> = ({dispatch, newMessageText}) => {
+export const DialogsInput: React.FC<DialogsInputPropsType> = (props) => {
 
     const addMessage = () => {
-            dispatch(addMessageAC())
+        props.addMessage()
     }
 
     const onChangeInTextAreaHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         if (null !== e.currentTarget.value) {
             let text = e.currentTarget.value
-
-            dispatch(updateNewTextMessageAC(text))
+            props.updateNewTextMessage(text)
         }
     }
 
@@ -29,11 +29,11 @@ export const DialogsInput: React.FC<DialogsInputPropsType> = ({dispatch, newMess
 
     return (
         <div>
-            <textarea value={newMessageText}
+            <textarea value={props.newMessageText}
                       onChange={onChangeInTextAreaHandler}
                       onKeyPress={onKeyPressHandler}
                       className={styles.textarea}
-                      >
+            >
             </textarea>
             <button onClick={addMessage}>Отправить</button>
         </div>
