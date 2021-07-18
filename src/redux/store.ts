@@ -30,7 +30,7 @@ export type MessagesPageType = {
 
 export type RootStateType = {
     profilePage: ProfilePageType
-    messagesPage: MessagesPageType
+    dialogsPage: MessagesPageType
 }
 
 export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC> | ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewTextMessageAC>
@@ -53,7 +53,7 @@ export let store: StoreType = {
             ],
             newPostText: 'Напиши, что-думаешь...'
         },
-        messagesPage: {
+        dialogsPage: {
             dialogs: [
                 {id: 1, name: 'Naida'},
                 {id: 2, name: 'Valentine'},
@@ -80,7 +80,7 @@ export let store: StoreType = {
 
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
-        this._state.messagesPage = dialogsReducer(this._state.messagesPage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
 
         this._callSubscriber(this._state)
     }
