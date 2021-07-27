@@ -1,6 +1,6 @@
 import {ActionTypes, ProfilePageType} from './store';
 
-// export type ActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+// export type ProfileReducerActionTypes = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
 
 const initialState = {
     posts: [

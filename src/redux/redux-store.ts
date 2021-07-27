@@ -9,4 +9,6 @@ let reducers = combineReducers({
     dialogsPage: dialogsReducer
 })
 
+export type DispatchType = typeof store.dispatch
+
 export let store = createStore(reducers)

@@ -1,6 +1,6 @@
 import {ActionTypes, MessagesPageType} from './store';
 
-// export type ActionTypes = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewTextMessageAC>
+// export type DialogsReducerActionTypes = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewTextMessageAC>
 
 const initialState = {
     dialogs: [
