@@ -1,4 +1,5 @@
-import {ActionTypes, MessagesPageType} from './store';
+import {AppActionsType} from './redux-store';
+import {UserType} from './users-reducer';
 
 const initialState = {
     dialogs: [
@@ -16,7 +17,25 @@ const initialState = {
     newMessageText: ''
 }
 
-export const dialogsReducer = (state: MessagesPageType = initialState, action: ActionTypes) => {
+export type InitType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+    newMessageText: string
+}
+
+export type DialogsType = {
+    id: number
+    name: string
+}
+
+export type MessagesType = {
+    id: number
+    message: string
+}
+
+export type MessagesActionType = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewTextMessageAC>
+
+export const dialogsReducer = (state = initialState, action: AppActionsType): InitType => {
     switch (action.type) {
         case 'ADD-MESSAGE': {
             let newMessage = {id: 12, message: state.newMessageText}
@@ -36,3 +55,6 @@ export const dialogsReducer = (state: MessagesPageType = initialState, action: A
             return state
     }
 }
+
+export const addMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
+export const updateNewTextMessageAC = (text: string) => ({type: 'UPDATE-NEW-TEXT-MESSAGE', textMessage: text} as const)

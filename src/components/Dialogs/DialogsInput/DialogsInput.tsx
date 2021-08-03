@@ -1,6 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import styles from './DialogsInput.module.css';
-import {ActionTypes, addMessageAC, updateNewTextMessageAC} from '../../../redux/store';
 
 type DialogsInputPropsType = {
     newMessageText: string

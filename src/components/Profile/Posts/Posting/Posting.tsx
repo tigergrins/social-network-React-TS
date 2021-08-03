@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Posting.module.css';
-import {ActionTypes, addPostAC, updateNewPostTextAC} from '../../../../redux/store';
 
 type PostingPropsType = {
     newPostText: string

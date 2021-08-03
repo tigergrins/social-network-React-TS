@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Posts.module.css';
 import Posting from "./Posting/Posting";
 import Posted from "./Posted/Posted";
-import {PostsType} from '../../../redux/store';
+import {PostsType} from '../../../redux/profile-reducer';
 
 type PostsPropsType = {
     posts: Array<PostsType>

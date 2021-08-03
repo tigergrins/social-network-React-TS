@@ -3,7 +3,7 @@ import styles from './Dialogs.module.css';
 import {DialogsItem} from './DialogsItem/DialogsItem';
 import MessagesItem from './MessagesItem/MessagesItem';
 import {DialogsInput} from './DialogsInput/DialogsInput';
-import {ActionTypes, DialogsType, MessagesPageType, MessagesType} from '../../redux/store';
+import {DialogsType, MessagesType} from '../../redux/dialogs-reducer';
 
 type DialogsPropsType = {
     dialogs: Array<DialogsType>

@@ -1,14 +1,17 @@
-import {combineReducers, createStore} from 'redux';
-import {profileReducer} from './profile-reducer';
-import {dialogsReducer} from './dialogs-reducer';
+import {combineReducers, createStore, Store} from 'redux';
+import {ProfileActionsType, profileReducer} from './profile-reducer';
+import {dialogsReducer, MessagesActionType} from './dialogs-reducer';
+import {UsersActionsTypes, usersReducer} from './users-reducer';
 
-export type StoreFromReducersType = typeof store;
+export type AppStoreType = typeof store
+export type AppStateType = ReturnType<typeof RootReducer>
+export type AppDispatchType = typeof store.dispatch
+export type AppActionsType = ProfileActionsType | MessagesActionType | UsersActionsTypes
 
-let reducers = combineReducers({
+let RootReducer = combineReducers({
     profilePage: profileReducer,
-    dialogsPage: dialogsReducer
+    dialogsPage: dialogsReducer,
+    usersPage: usersReducer,
 })
 
-export type DispatchType = typeof store.dispatch
-
-export let store = createStore(reducers)
+export let store: Store = createStore(RootReducer)

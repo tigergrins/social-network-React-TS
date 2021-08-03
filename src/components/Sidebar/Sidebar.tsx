@@ -18,6 +18,9 @@ function Sidebar() {
                     <li className={styles.link}>
                         <NavLink to='/settings' activeClassName={styles.active}>Settings</NavLink>
                     </li>
+                    <li className={styles.link}>
+                        <NavLink to='/users' activeClassName={styles.active}>Users</NavLink>
+                    </li>
                 </ul>
             </nav>
         </aside>
