@@ -2,23 +2,19 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 
-const initialState: InitType = {
-    users: [
-        {id: '1', followed: true, photoUrl: 'https://skafeto.com/wp-content/uploads/2019/08/812321739111.jpeg', fullName: 'Danila', status: 'I\'m developer', location: {country: 'Russia', city: 'Moscow'}},
-        {id: '2', followed: false, photoUrl: 'https://skafeto.com/wp-content/uploads/2019/08/812321739111.jpeg', fullName: 'Naida', status: 'I\'m psychologist', location: {country: 'Russia', city: 'Moscow'}},
-        {id: '3', followed: true, photoUrl: 'https://skafeto.com/wp-content/uploads/2019/08/812321739111.jpeg', fullName: 'Mike', status: 'I\'m product-manager', location: {country: 'Russia', city: 'Moscow'}}
-    ],
-}
-
 export type InitType = {
     users: Array<UserType>
+}
+
+const initialState: InitType = {
+    users: [],
 }
 
 export type UserType = {
     id: string
     followed: boolean
     photoUrl: string
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }

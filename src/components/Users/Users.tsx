@@ -1,6 +1,7 @@
 import React from 'react';
 import {UserType} from '../../redux/users-reducer';
 import styles from './Users.module.css'
+import axios from 'axios'
 
 type UsersPropsType = {
     users: Array<UserType>
@@ -11,32 +12,12 @@ type UsersPropsType = {
 
 export function Users(props: UsersPropsType) {
     if (props.users.length === 0) {
-        props.setUsers([
-            {
-                id: '1',
-                followed: true,
-                photoUrl: 'https://skafeto.com/wp-content/uploads/2019/08/812321739111.jpeg',
-                fullName: 'Danila',
-                status: 'I\'m developer',
-                location: {country: 'Russia', city: 'Moscow'}
-            },
-            {
-                id: '2',
-                followed: false,
-                photoUrl: 'https://skafeto.com/wp-content/uploads/2019/08/812321739111.jpeg',
-                fullName: 'Naida',
-                status: 'I\'m psychologist',
-                location: {country: 'Russia', city: 'Moscow'}
-            },
-            {
-                id: '3',
-                followed: true,
-                photoUrl: 'https://skafeto.com/wp-content/uploads/2019/08/812321739111.jpeg',
-                fullName: 'Mike',
-                status: 'I\'m product-manager',
-                location: {country: 'Russia', city: 'Moscow'}
-            }
-        ])
+
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+            props.setUsers(response.data.items)
+            console.log(response)
+        })
     }
 
     return (
@@ -54,10 +35,10 @@ export function Users(props: UsersPropsType) {
                             }}>Follow</button>}
                         </div>
                         <div>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>location.country</div>
+                            <div>location.city</div>
                         </div>
                     </div>
                 )
