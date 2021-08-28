@@ -8,7 +8,7 @@ import {Route} from 'react-router-dom';
 import {News} from './components/News/News';
 import Settings from './components/Settings/Settings';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
-import {UsersContainer} from './components/Users/UsersContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 export const App: React.FC = () => {
     return (
