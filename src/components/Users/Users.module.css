@@ -6,3 +6,13 @@
 .users {
     padding: 20px 20px 20px 50px;
 }
+
+.pageNumber {
+    cursor: pointer;
+    padding: 0 5px 0 0;
+}
+
+.selectedPage {
+    font-weight: 700;
+}
+
