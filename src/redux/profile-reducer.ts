@@ -21,7 +21,7 @@ export type PostsType = {
     likesCount: number
 }
 
-export type ProfileActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof updateNewPostTextAC>
+export type ProfileActionsType = ReturnType<typeof addPost> | ReturnType<typeof updateNewPostText>
 
 export const profileReducer = (state= initialState, action: AppActionsType): InitType => {
     switch (action.type) {
@@ -48,5 +48,5 @@ export const profileReducer = (state= initialState, action: AppActionsType): Ini
     }
 }
 
-export const addPostAC = () => ({type: 'ADD-POST'} as const)
-export const updateNewPostTextAC = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText: text} as const)
+export const addPost = () => ({type: 'ADD-POST'} as const)
+export const updateNewPostText = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText: text} as const)

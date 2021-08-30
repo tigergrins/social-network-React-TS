@@ -1,5 +1,4 @@
 import {AppActionsType} from './redux-store';
-import {UserType} from './users-reducer';
 
 const initialState = {
     dialogs: [
@@ -33,7 +32,7 @@ export type MessagesType = {
     message: string
 }
 
-export type MessagesActionType = ReturnType<typeof addMessageAC> | ReturnType<typeof updateNewTextMessageAC>
+export type MessagesActionType = ReturnType<typeof addMessage> | ReturnType<typeof updateNewTextMessage>
 
 export const dialogsReducer = (state = initialState, action: AppActionsType): InitType => {
     switch (action.type) {
@@ -56,5 +55,5 @@ export const dialogsReducer = (state = initialState, action: AppActionsType): In
     }
 }
 
-export const addMessageAC = () => ({type: 'ADD-MESSAGE'} as const)
-export const updateNewTextMessageAC = (text: string) => ({type: 'UPDATE-NEW-TEXT-MESSAGE', textMessage: text} as const)
+export const addMessage = () => ({type: 'ADD-MESSAGE'} as const)
+export const updateNewTextMessage = (text: string) => ({type: 'UPDATE-NEW-TEXT-MESSAGE', textMessage: text} as const)

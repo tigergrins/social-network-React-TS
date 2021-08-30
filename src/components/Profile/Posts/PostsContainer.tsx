@@ -2,7 +2,7 @@ import React from 'react';
 import Posts from './Posts';
 import {AppDispatchType, AppStateType} from '../../../redux/redux-store';
 import { connect } from 'react-redux';
-import {addPostAC, PostsType, updateNewPostTextAC} from '../../../redux/profile-reducer';
+import {addPost, PostsType, updateNewPostText} from '../../../redux/profile-reducer';
 
 type MapStateToPropsType =  {
     posts: Array<PostsType>
@@ -24,10 +24,10 @@ const mapStoreToProps = (state: AppStateType): MapStateToPropsType => {
 const mapDispatchToProps = (dispatch: AppDispatchType): MapDispatchToPropsType => {
     return {
         addPost: () => {
-            dispatch(addPostAC())
+            dispatch(addPost())
         },
         onChangeInTextArea: (text: string) => {
-            const action = updateNewPostTextAC(text)
+            const action = updateNewPostText(text)
             dispatch(action)
         },
     }
