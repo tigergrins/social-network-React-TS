@@ -16,12 +16,8 @@ export const App: React.FC = () => {
             <Header/>
             <main className="main">
                 <Sidebar/>
-
-                <Route path="/profile/:userId?" render={() =>
-                    <ProfileContainer />}
-                />
-                <Route path="/dialogs/" render={() =>
-                    <DialogsContainer />}/>
+                <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                <Route path="/dialogs/" render={() => <DialogsContainer/>}/>
                 <Route path="/news/" render={() => <News/>}/>
                 <Route path="/settings/" render={() => <Settings/>}/>
                 <Route path="/users/" render={() => <UsersContainer/>}/>
