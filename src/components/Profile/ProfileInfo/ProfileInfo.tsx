@@ -3,9 +3,6 @@ import {ProfileStateType} from '../../../redux/profile-reducer';
 import styles from './ProfileInfo.module.css';
 
 type ProfileInfoType = {
-    // avatar: string | null
-    // fullName: string | null
-    // contacts: ContactsType | null
     profile:  ProfileStateType | null
 }
 
@@ -24,11 +21,11 @@ export function ProfileInfo(props: ProfileInfoType) {
                     <div className={styles.description}>
                         <h3>Contacts</h3>
                         <ul>
-                            <li>`Github: ${props.profile?.contacts.github}`</li>
-                            <li>`VK: ${props.profile?.contacts.vk}`</li>
-                            <li>Facebook: ${props.profile?.contacts.facebook}</li>
-                            <li>`Instagram: ${props.profile?.contacts.instagram}`</li>
-                            <li>`Website: ${props.profile?.contacts.website}`</li>
+                            <li>Github: {props.profile?.contacts.github}</li>
+                            <li>VK: {props.profile?.contacts.vk}</li>
+                            <li>Facebook: {props.profile?.contacts.facebook}</li>
+                            <li>Instagram: {props.profile?.contacts.instagram}</li>
+                            <li>Website: {props.profile?.contacts.website}</li>
                         </ul>
                     </div>
                 </div>
