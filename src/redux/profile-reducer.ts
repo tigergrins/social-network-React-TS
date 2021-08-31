@@ -1,16 +1,30 @@
-import {AppActionsType} from './redux-store';
-
-
-const initialState = {
-    posts: [
-        {id: '1', message: 'Hello!!!', likesCount: 6},
-        {id: '2', message: 'My second post', likesCount: 1},
-        {id: '3', message: 'My first post', likesCount: 123}
-    ],
-    newPostText: 'Напиши, что-думаешь...'
+export type ContactsType = {
+    facebook: string | null
+    website: string | null
+    vk: string | null
+    twitter: string | null
+    instagram: string | null
+    youtube: string | null
+    github: string | null
+    mainLink: string | null
 }
 
-type InitType = {
+export type PhotosType = {
+    small: string
+    large: string
+}
+
+export type ProfileStateType = {
+    aboutMe: string
+    contacts: ContactsType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    userId: number
+    photos: PhotosType
+}
+
+type PostingType = {
     posts: Array<PostsType>
     newPostText: string
 }
@@ -21,26 +35,55 @@ export type PostsType = {
     likesCount: number
 }
 
-export type ProfileActionsType = ReturnType<typeof addPost> | ReturnType<typeof updateNewPostText>
+type InitType = {
+    posting: PostingType
+    profile: ProfileStateType | null
+}
 
-export const profileReducer = (state= initialState, action: AppActionsType): InitType => {
+const initialState = {
+    posting: {
+        posts: [
+            {id: '1', message: 'Hello!!!', likesCount: 6},
+            {id: '2', message: 'My second post', likesCount: 1},
+            {id: '3', message: 'My first post', likesCount: 123}
+        ],
+        newPostText: 'Напиши, что-думаешь...',
+    },
+    profile: null,
+}
+
+export type ProfileActionsType = ReturnType<typeof addPost> | ReturnType<typeof updateNewPostText> |
+    ReturnType<typeof setUserProfile>
+
+export const profileReducer = (state: InitType = initialState, action: ProfileActionsType): InitType => {
     switch (action.type) {
         case 'ADD-POST': {
             let newPost = {
                 id: '5',
-                message: state.newPostText,
+                message: state.posting.newPostText,
                 likesCount: 0
             };
             return {
                 ...state,
-                posts: [...state.posts, newPost],
-                newPostText: 'Напиши, что-думаешь...'
+                posting: {
+                    posts: [...state.posting.posts, newPost],
+                    newPostText: 'Напиши, что-думаешь...',
+                }
             }
         }
         case 'UPDATE-NEW-POST-TEXT': {
             return {
                 ...state,
-                newPostText: action.newText
+                posting: {
+                    ...state.posting,
+                    newPostText: action.newText
+                }
+            }
+        }
+        case 'SET-USER-PROFILE': {
+            return {
+                ...state,
+                profile: action.profile
             }
         }
         default:
@@ -50,3 +93,4 @@ export const profileReducer = (state= initialState, action: AppActionsType): Ini
 
 export const addPost = () => ({type: 'ADD-POST'} as const)
 export const updateNewPostText = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText: text} as const)
+export const setUserProfile = (profile: ProfileStateType | null) => ({type: 'SET-USER-PROFILE', profile} as const)

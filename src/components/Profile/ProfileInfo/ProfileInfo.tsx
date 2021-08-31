@@ -1,24 +1,34 @@
 import React from 'react';
+import {ProfileStateType} from '../../../redux/profile-reducer';
 import styles from './ProfileInfo.module.css';
 
-export function ProfileInfo() {
+type ProfileInfoType = {
+    // avatar: string | null
+    // fullName: string | null
+    // contacts: ContactsType | null
+    profile:  ProfileStateType | null
+}
+
+export function ProfileInfo(props: ProfileInfoType) {
     return (
             <section className={styles.profile}>
                 <div className={styles.poster}>
                     <img src="https://cdn.pixabay.com/photo/2020/07/04/06/41/clouds-5368444_960_720.jpg" alt="poster"/>
                 </div>
                 <div className={styles.avatar}>
-                    <img src="https://cdn.pixabay.com/photo/2012/10/10/10/36/moon-landing-60582_960_720.jpg"
+                    <img src={props.profile?.photos.small}
                          alt="avatar"/>
                 </div>
                 <div className={styles.about}>
-                    <div className={styles.name}>Daniel Smith</div>
+                    <div className={styles.name}>{props.profile?.fullName}</div>
                     <div className={styles.description}>
+                        <h3>Contacts</h3>
                         <ul>
-                            <li>30.12.1993</li>
-                            <li>Moscow</li>
-                            <li>MGU</li>
-                            <li>ds.com</li>
+                            <li>`Github: ${props.profile?.contacts.github}`</li>
+                            <li>`VK: ${props.profile?.contacts.vk}`</li>
+                            <li>Facebook: ${props.profile?.contacts.facebook}</li>
+                            <li>`Instagram: ${props.profile?.contacts.instagram}`</li>
+                            <li>`Website: ${props.profile?.contacts.website}`</li>
                         </ul>
                     </div>
                 </div>
