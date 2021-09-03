@@ -9,11 +9,12 @@ import Settings from './components/Settings/Settings';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 export const App: React.FC = () => {
     return (
         <div className="wrapper">
-            <Header/>
+            <HeaderContainer/>
             <main className="main">
                 <Sidebar/>
                 <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
