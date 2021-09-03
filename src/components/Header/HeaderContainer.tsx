@@ -20,7 +20,7 @@ class HeaderContainer extends React.Component<HeaderContainerPropsType> {
     }
 
     render() {
-        return <Header />
+        return <Header isAuth={this.props.isAuth} login={this.props.login}/>
     }
 }
 

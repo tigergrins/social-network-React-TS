@@ -4,7 +4,8 @@ import logo from '../../assets/images/logo.png'
 import {NavLink} from 'react-router-dom';
 
 type HeaderPropsType = {
-
+    isAuth: boolean
+    login: string | null
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -16,7 +17,7 @@ export const Header = (props: HeaderPropsType) => {
                     alt="logo"/>
             </div>
             <div className="styles.loginBlock">
-                <NavLink to={'/login'} activeClassName={styles.active}>Login</NavLink>
+                {props.isAuth ? <div>{props.login}</div> : <NavLink to={'/login'} activeClassName={styles.active}>Login</NavLink>}
             </div>
         </header>
     )

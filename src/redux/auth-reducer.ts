@@ -23,7 +23,8 @@ export const authReducer = (state = initialState, action: UsersActionsTypes): In
         case SET_USER_DATA: {
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             }
         }
         default:
