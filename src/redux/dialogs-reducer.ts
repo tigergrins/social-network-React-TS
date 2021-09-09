@@ -9,7 +9,7 @@ const initialState = {
     ],
 
     messages: [
-        {id: 1, message: 'Hello!'},
+        {id: 1, message: 'Projects!'},
         {id: 2, message: 'Are you here?'},
         {id: 3, message: 'Zzz...zzz...zzz'}
     ],

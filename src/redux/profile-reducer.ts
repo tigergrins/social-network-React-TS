@@ -43,7 +43,7 @@ type InitType = {
 const initialState = {
     posting: {
         posts: [
-            {id: '1', message: 'Hello!!!', likesCount: 6},
+            {id: '1', message: 'Projects!!!', likesCount: 6},
             {id: '2', message: 'My second post', likesCount: 1},
             {id: '3', message: 'My first post', likesCount: 123}
         ],
