@@ -5,7 +5,7 @@ import {
     follow,
     setCurrentPage,
     setTotalUsersCount,
-    setUsers,
+    setUsers, toggleFollowingProgress,
     toggleIsFetching,
     unfollow,
     UserType
@@ -21,12 +21,14 @@ type UsersAPIComponentPropsType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: string[]
     follow: (userId: string) => void
     unfollow: (userId: string) => void
     setUsers: (users: Array<UserType>) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: string) => void
 }
 
 class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
@@ -58,8 +60,10 @@ class UsersContainer extends React.Component<UsersAPIComponentPropsType> {
                        pageSize={this.props.pageSize}
                        totalCount={this.props.totalCount}
                        currentPage={this.props.currentPage}
+                       followingInProgress={this.props.followingInProgress}
                        follow={this.props.follow}
                        unfollow={this.props.unfollow}
+                       toggleFollowingProgress={this.props.toggleFollowingProgress}
                        onPageChanged={this.onPageChanged}/>
             </div>
         )
@@ -73,6 +77,8 @@ type MapStateToPropsType = {
     totalCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: string[]
+
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
@@ -82,6 +88,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         totalCount: state.usersPage.totalCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
@@ -92,4 +99,5 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching,
+    toggleFollowingProgress,
 })(UsersContainer)
