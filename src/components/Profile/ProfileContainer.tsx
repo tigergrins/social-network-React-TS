@@ -1,10 +1,9 @@
 import React from 'react';
 import Profile from './Profile';
 import {connect} from 'react-redux';
-import {addPost, ProfileStateType, setUserProfile, updateNewPostText} from '../../redux/profile-reducer';
+import {addPost, getProfile, ProfileStateType, updateNewPostText} from '../../redux/profile-reducer';
 import {AppStateType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {profileAPI} from '../../api/api';
 
 type PathParamsType = {
     userId: string
@@ -17,11 +16,7 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         let userId = this.props.match.params.userId
         if (!userId) userId = '2'
 
-        profileAPI.getProfile(userId)
-            .then(data => {
-                this.props.setUserProfile(data)
-
-            })
+        this.props.getProfile(userId)
     }
 
     render() {
@@ -36,7 +31,7 @@ type MapStateToPropsType = {
 type MapDispatchToProps = {
     addPost: ()=> void
     updateNewPostText: (text: string)=> void
-    setUserProfile: (profile: ProfileStateType | null)=> void
+    getProfile: (userId: string) => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
@@ -45,4 +40,4 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 const withUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, {addPost, updateNewPostText, setUserProfile})(withUrlDataContainerComponent)
+export default connect(mapStateToProps, {addPost, updateNewPostText, getProfile})(withUrlDataContainerComponent)

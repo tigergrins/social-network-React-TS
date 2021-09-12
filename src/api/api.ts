@@ -30,3 +30,9 @@ export const profileAPI = {
     }
 }
 
+export const headerAPI = {
+    getAuthorizedUser () {
+        return instance.get(`auth/me`)
+            .then(response => response.data)
+    }
+}

@@ -1,3 +1,7 @@
+import {ThunkAction} from 'redux-thunk';
+import {AppStateType} from './redux-store';
+import {profileAPI} from '../api/api';
+
 export type ContactsType = {
     facebook: string | null
     website: string | null
@@ -94,3 +98,14 @@ export const profileReducer = (state: InitType = initialState, action: ProfileAc
 export const addPost = () => ({type: 'ADD-POST'} as const)
 export const updateNewPostText = (text: string) => ({type: 'UPDATE-NEW-POST-TEXT', newText: text} as const)
 export const setUserProfile = (profile: ProfileStateType | null) => ({type: 'SET-USER-PROFILE', profile} as const)
+
+export type ThunkType = ThunkAction<void, AppStateType, unknown, ProfileActionsType>
+
+export const getProfile = (userId: string): ThunkType => {
+    return (dispatch, getState) => {
+        profileAPI.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
+}
