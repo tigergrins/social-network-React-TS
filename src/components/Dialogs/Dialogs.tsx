@@ -4,6 +4,7 @@ import {DialogsItem} from './DialogsItem/DialogsItem';
 import MessagesItem from './MessagesItem/MessagesItem';
 import {DialogsInput} from './DialogsInput/DialogsInput';
 import {DialogsType, MessagesType} from '../../redux/dialogs-reducer';
+import {Redirect} from 'react-router-dom';
 
 type DialogsPropsType = {
     dialogs: Array<DialogsType>
@@ -11,14 +12,17 @@ type DialogsPropsType = {
     newMessageText: string
     addMessage: () => void
     updateNewTextMessage: (text: string) => void
+    isAuth: boolean
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = ({dialogs, messages, newMessageText, addMessage, updateNewTextMessage}) => {
+export const Dialogs: React.FC<DialogsPropsType> = ({dialogs, messages, newMessageText, addMessage, updateNewTextMessage, isAuth}) => {
     let dialogsElements = dialogs.map(
         (dialog: { name: string; id: number; }) => <DialogsItem name={dialog.name} id={dialog.id} key={dialog.id}/>);
 
     let messagesElements = messages.map(
         (message: { message: string }) => <MessagesItem message={message.message}/>);
+
+    if (!isAuth) return <Redirect to='/login'/>
 
     return (
         <div className={styles.dialogs}>

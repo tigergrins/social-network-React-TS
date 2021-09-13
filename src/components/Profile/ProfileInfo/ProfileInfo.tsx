@@ -1,6 +1,7 @@
 import React from 'react';
 import {ProfileStateType} from '../../../redux/profile-reducer';
 import styles from './ProfileInfo.module.css';
+import avatar from './../../../assets/images/user.png'
 
 type ProfileInfoType = {
     profile:  ProfileStateType | null
@@ -13,7 +14,7 @@ export function ProfileInfo(props: ProfileInfoType) {
                     <img src="https://cdn.pixabay.com/photo/2020/07/04/06/41/clouds-5368444_960_720.jpg" alt="poster"/>
                 </div>
                 <div className={styles.avatar}>
-                    <img src={props.profile?.photos.small}
+                    <img src={props.profile?.photos.small ? props.profile?.photos.small : avatar}
                          alt="avatar"/>
                 </div>
                 <div className={styles.about}>
