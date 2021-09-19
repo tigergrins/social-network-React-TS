@@ -3,6 +3,7 @@ import {Dialogs} from './Dialogs';
 import { connect } from 'react-redux';
 import {AppStateType} from '../../redux/redux-store';
 import {addMessage, DialogsType, MessagesType, updateNewTextMessage} from '../../redux/dialogs-reducer';
+import {withAuthRedirect} from '../../hoc/withAuthRedirect';
 
 type MapStateToPropsType =  {
     dialogs: Array<DialogsType>
@@ -20,7 +21,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
-export const DialogsContainer = connect(mapStateToProps, {
+export default withAuthRedirect(connect(mapStateToProps, {
     addMessage,
     updateNewTextMessage,
-})(Dialogs)
+})(Dialogs))
+
