@@ -27,6 +27,10 @@ export const profileAPI = {
     getProfile (id: string) {
         return instance.get(`profile/${id}`)
             .then(response => response.data)
+    },
+    getStatus (id: string) {
+        return instance.get(`profile/status/${id}`)
+            .then(response => response.data)
     }
 }
 

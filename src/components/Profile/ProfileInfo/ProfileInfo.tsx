@@ -2,9 +2,11 @@ import React from 'react';
 import {ProfileStateType} from '../../../redux/profile-reducer';
 import styles from './ProfileInfo.module.css';
 import avatar from './../../../assets/images/user.png'
+import {ProfileStatus} from './ProfileStatus/ProfileStatus';
 
 type ProfileInfoType = {
     profile:  ProfileStateType | null
+    status: string | null
 }
 
 export function ProfileInfo(props: ProfileInfoType) {
@@ -17,6 +19,7 @@ export function ProfileInfo(props: ProfileInfoType) {
                     <img src={props.profile?.photos.small ? props.profile?.photos.small : avatar}
                          alt="avatar"/>
                 </div>
+                <ProfileStatus status={props.status}/>
                 <div className={styles.about}>
                     <div className={styles.name}>{props.profile?.fullName}</div>
                     <div className={styles.description}>
